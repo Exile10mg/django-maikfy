@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "base.apps.BaseConfig",
     "pages.apps.PagesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -76,8 +77,11 @@ WSGI_APPLICATION = "maikfy.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": 'maikfy_db',
+        "USER": 'postgres',
+        "PASSWORD": '123',
+        "HOST": 'localhost',
     }
 }
 
@@ -121,3 +125,18 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# SMTP Conf
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'exile3it@outlook.com'
+EMAIL_HOST_PASSWORD = 'Pulawiak1.'
+DEFAULT_FROM_EMAIL = 'exile3it@outlook.com'
+
+# Media Settings
+
+MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_URL = '/media/'

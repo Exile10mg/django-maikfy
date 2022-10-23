@@ -1,0 +1,92 @@
+{% extends 'base_login.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static '/style.css' %}" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<style>
+  .box {
+    height: 800px;
+  }
+  .box::before {
+    height: 800px;
+  }
+  .box::after {
+    height: 800px;
+  }
+  .captcha {
+  position: relative;
+}
+.captcha-fake-field {
+  background: transparent;
+  bottom: 0;
+  border: none;
+  display: block;
+  height: 1px;
+  left: 12px;
+  width: 1px;
+  position: absolute;
+  z-index: -1;
+}
+</style>
+<script>
+  setTimeout(() => {
+    const wiadomosc = document.getElementById("wiadomosc");
+    wiadomosc.style.display = "none";
+  }, 7000);
+</script>
+<script>
+  window.removeFakeCaptcha = function () {
+    document.querySelector(".captcha-fake-field").remove();
+  };
+</script>
+<link rel="stylesheet" href="{% static '/star.css' %}" />
+<div class="box">
+  <div class="form">
+    <a href="{% url 'home' %}" style="text-decoration: none"><h1>Maikfy</h1></a>
+    <h2>Register Form</h2>
+    {% if messages %} {% for message in messages %}
+    <div class="wiadomosc" id="wiadomosc">{{ message }}</div>
+    {% endfor %} {% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="inputBox">
+        <input type="text" required="required" name="username" />
+        <span>Username: </span>
+        <i></i>
+      </div>
+      <div class="inputBox">
+        <input type="password" required="required" name="password" />
+        <span>Password: </span>
+        <i></i>
+      </div>
+      <div class="inputBox">
+        <input type="password" required="required" name="password2" />
+        <span>Confirm Password: </span>
+        <i></i>
+      </div>
+      <div class="inputBox">
+        <input type="email" required="required" name="email" />
+        <span>E-Mail: </span>
+        <i></i>
+      </div>
+      <br />
+      <div class="links">
+        <a href="#">
+          <input type="checkbox" required="required" /> I accept the terms and
+          conditions of the website
+        </a>
+      </div>
+      <div class="captcha">
+        <div class="g-recaptcha" data-theme ='dark' data-sitekey="6LeUlosiAAAAAMi2reuloPsg6GB6wKPXLnoYBEHa" data-callback="removeFakeCaptcha"></div>
+        <input type="checkbox" class="captcha-fake-field" tabindex="-1" required>
+     </div>
+        <br />
+        <div class="links">
+          <a></a>
+          <a href="{% url 'login' %}">Back to login</a>
+        </div>
+        <input type="submit" value="Register" />
+      </form>
+    </form>
+  </div>
+</div>
+<script src="{% static '/app3D.js' %}"></script>
+{% endblock %}
